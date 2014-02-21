@@ -1,13 +1,19 @@
 $(document).ready(function(){
 
-	$('button#editprofile').on('click', function(){
-		$('div.old').fadeToggle(15);
-		$('div.edit').fadeToggle(15);
-		$('tr.saveprofile').toggle(15);
+	$('button#editName').on('click', function(){
+		$('table#old').hide();
+		$('table#new').show();
+		$(this).hide();
+		$('button#saveMyName').show();
 	});
 
-	$('button#saveMyProfileEdit').bind('click', function(event) {
-		$('#editProfile').submit();
+	$('button#saveMyName').bind('click', function(event) {
+		$('form#editName').submit();
+	});
+
+	$('button.saveMe').on('click', function(){
+		$(this).hide();
+		$('button#editName').show();
 	});
 
 })
