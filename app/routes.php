@@ -28,7 +28,10 @@ Route::get('profile/messages', 'UserProfileController@getMessages');
 Route::post('profile/messages', 'UserProfileController@postMessages');
 
 Route::get('profile/settings', 'UserProfileController@getProfile');
-Route::put('profile/settings/edit', 'UserProfileController@updateProfile');
+Route::put('profile/settings/editname', 'UserProfileController@updateName');
+Route::put('profile/settings/editemail', 'UserProfileController@updateEmail');
+Route::put('profile/settings/editpass', 'UserProfileController@updatePass');
+Route::put('profile/settings/editdesc', 'UserProfileController@updateDesc');
 
 Route::get('profile/plan', 'UserProfileController@getPlan');
 Route::post('profile/plan', 'UserProfileController@updatePlan');

@@ -8,6 +8,71 @@
 @section('content')
 <div class="row container" style="margin:0 auto;">
 	<div class="col-md-10 col-sm-10 col-xs-10 col-lg-10">
+
+		<div class="panel panel-info">
+			<div class="panel-heading"><h3 style="margin:0;">User information.				<button id="editprofile" type="button" data-target="edit-profile" class="btn btn-primary btn-xs form-control-feedback pull-right">
+					<span class="glyphicon glyphicon-cog"></span> 
+					Edit
+				</button></h3> </div>
+			<div class="panel-body">
+				<table class="table table-hover">
+					<tr>
+						<td>
+							<b>Username:</b>
+						</td>
+						<td>
+							{{ Auth::user()->username }}
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<b>Firstname:</b>
+						</td>
+						<td>
+							{{ Auth::user()->firstname }}
+						</td>
+					</tr>
+					<tr>
+						<td><b>Lastname:</b></td>
+						<td>{{ Auth::user()->lastname }}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+		<div class="panel panel-info">
+			<div class="panel-heading"><h3 style="margin:0;">Email address.				<button id="editprofile" type="button" data-target="edit-profile" class="btn btn-primary btn-xs form-control-feedback pull-right">
+					<span class="glyphicon glyphicon-cog"></span> 
+					Edit
+				</button></h3> </div>
+			<div class="panel-body">
+				<table class="table table-bordered">
+					<tr>
+						<td>
+							<b>Username:</b>
+						</td>
+						<td>
+							<b>Firstname:</b>
+						</td>
+						<td>
+							<b>Lastname:</b>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							{{ Auth::user()->username }}
+						</td>
+						<td>
+							{{ Auth::user()->firstname }}
+						</td>
+						<td>
+							{{ Auth::user()->lastname }}
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
 		<table class="table table-hover">
 			<tr class="username">
 				<td><b>Username:</b></td>
