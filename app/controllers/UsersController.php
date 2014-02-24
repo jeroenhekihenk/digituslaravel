@@ -39,19 +39,48 @@ class UsersController extends BaseController {
 
 	public function postLogin()
 	{
-		if (Auth::attempt(array('email'=>Input::get('email'), 'password'=>Input::get('password')))) {
-    	return Redirect::to('profile/dashboard')->with('message', 'You are now logged in!');
-	} else {
-    	return Redirect::to('login')
-        ->with('message', 'Your username/password combination was incorrect')
-        ->withInput();
+		$input = Input::all();
+		$remember = (isset($input['remember'])) ? true : null;
+		$rules = array('email_or_username'=>'required', 'password'=>'required|min:6');
+		$validator = Validator::make($input, $rules);
+		$user = User::where('email', $input['email_or_username'])->orWhere('username', $input['email_or_username'])->first();
+
+		if(!$user) {
+			$attempt = false;
+			return Redirect::to('login')->with('message', 'Your username/password combination was incorrect')->withInput();
+		} else {
+			$attempt = Auth::attempt(array( 'email' => $user->email, 'password'=>$input['password']), $remember);
+			return Redirect::to('profile/dashboard')->with('message', 'You are now logged in!');
 		}
+
+		
 	}
 
 	public function getLogout()
 	{
 		Auth::logout();
 		return Redirect::to('login')->with('message', 'You are now logged out.');
+	}
+
+	public function store()
+	{
+		$input = Input::all();
+		$remember = (isset($input['remember'])) ? true : null;
+		$rules = array('email_or_username'=>'required', 'password'=>'required|min:6');
+		$validator = Validator::make($input, $rules);
+
+		if ($validator->fails())
+		{
+			return Redirect::to('login')->withErrors($validator)->withInput();
+		}
+
+		$user = User::where('email', $input['email_or_username'])->orWhere('username', $input['email_or_username'])->first();
+
+		if(!$user) {
+			$attempt = false;
+		} else {
+			$attempt = Auth::attempt(array( 'email' => $user->email, 'password'=>$input['password']), $remember);
+		}
 	}
 
 }
