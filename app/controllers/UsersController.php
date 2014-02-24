@@ -62,25 +62,4 @@ class UsersController extends BaseController {
 		return Redirect::to('login')->with('message', 'You are now logged out.');
 	}
 
-	public function store()
-	{
-		$input = Input::all();
-		$remember = (isset($input['remember'])) ? true : null;
-		$rules = array('email_or_username'=>'required', 'password'=>'required|min:6');
-		$validator = Validator::make($input, $rules);
-
-		if ($validator->fails())
-		{
-			return Redirect::to('login')->withErrors($validator)->withInput();
-		}
-
-		$user = User::where('email', $input['email_or_username'])->orWhere('username', $input['email_or_username'])->first();
-
-		if(!$user) {
-			$attempt = false;
-		} else {
-			$attempt = Auth::attempt(array( 'email' => $user->email, 'password'=>$input['password']), $remember);
-		}
-	}
-
 }

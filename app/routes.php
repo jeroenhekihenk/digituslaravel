@@ -33,6 +33,9 @@ Route::put('profile/settings/editemail', 'UserProfileController@updateEmail');
 Route::put('profile/settings/editpass', 'UserProfileController@updatePass');
 Route::put('profile/settings/editdesc', 'UserProfileController@updateDesc');
 
+Route::get('profile/adminsettings', 'UserProfileController@getAdminSettings');
+Route::post('profile/adminsettings', 'UserProfileController@newUser');
+
 Route::get('profile/plan', 'UserProfileController@getPlan');
 Route::post('profile/plan', 'UserProfileController@updatePlan');
 

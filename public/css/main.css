@@ -9,6 +9,10 @@ body {
 	width: 400px;
 	margin: 0 auto;
 }
+div#overlay{
+	margin: 0;
+	padding: 0;
+}
 
 
 form.form-signin input.form-control,
@@ -86,7 +90,37 @@ form.editprofile > input{
 }
 
 
-table#new,
-button.saveMe{
+table#newName,
+table#newPassword,
+table#newDesc,
+button.saveMyName,
+button.saveMyPassword,
+button.saveMyDesc,
+button.cancelMyName,
+button.cancelMyPassword,
+button.cancelMyDesc,
+div.addnewuser{
 	display:none;
+}
+button.cancelMyName,
+button.cancelMyPassword,
+button.cancelMyDesc{
+	margin-left: 1em;
+}
+
+div.addnewuser{
+	background: rgba(40,40,40,0.7);
+	position:absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 5000;
+	padding: 0;
+	margin: -100px 0 0;
+}
+form.form-absolute{
+	position: absolute;
+	background-color: white;
+	padding: 1em;
+	left: 34%;
+	top: 16%;
 }

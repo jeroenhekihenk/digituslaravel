@@ -11,6 +11,10 @@
 </head>
 <body>
 
+	<div id="overlay">
+		@yield('overlay')
+	</div>
+
 	<div class="navbar navbar-fixed-top navbar-default row">
 		<div class="navbar-inner">
 			<div class="container">
@@ -40,6 +44,9 @@
 										{{ HTML::link("profile/settings", 'Account Settings') }}
 									</li>
 									<li>
+										{{ HTML::link("profile/adminsettings", 'Admin Settings') }}
+									</li>
+									<li>
 										{{ HTML::link("profile/plan", 'Change Plan') }}
 									</li>
 									<li>{{ HTML::link('logout', 'Logout') }}</li>
@@ -66,6 +73,8 @@
 	<div id="content">
 		@yield('content')
 	</div>
+
+
 
 	{{ HTML::script('js/jquery-2.1.0.min.js') }}
 	{{ HTML::script('js/main.js') }}
