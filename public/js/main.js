@@ -10,6 +10,9 @@ $(document).ready(function(){
 	$('button#saveMyDesc').bind('click', function(event) {
 		$('form#editDesc').submit();
 	});
+	$('button#saveMyPassword').bind('click', function(event) {
+		$('form#editPassword').submit();
+	});
 
 	function toggleSaveNameInfo() {
 		$('table#newName, table#oldName, button#editName, button#saveMyName, button#cancelSaveMyName, button.saveMe').toggle();

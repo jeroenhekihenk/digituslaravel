@@ -66,7 +66,7 @@
 		</div>
 
 		<div class="panel panel-default">
-			<div class="panel-heading"><h3 style="margin:0;">Password				<button id="editPassword" type="button" class="btn btn-primary btn-xs form-control-feedback pull-right">
+			<div class="panel-heading"><h3 style="margin:0;">Update password				<button id="editPassword" type="button" class="btn btn-primary btn-xs form-control-feedback pull-right">
 					<span class="glyphicon glyphicon-cog"></span> 
 					Edit
 				</button>
@@ -83,7 +83,7 @@
 				<table class="table-condensed" id="oldPass">
 					{{ Form::open(array('action'=>'UserProfileController@updatePass', 'method'=>'PUT', 'id'=>'editPassword')) }}
 					<tr><td><b>Password:</b></td><td>{{ Form::password('password', null, array('class'=>'form-control','placeholder'=>'Password..')) }}</td></tr>
-					<tr><td><b>Confirm Password:</b></td><td>{{ Form::password('password', null, array('class'=>'form-control','placeholder'=>'Password confirmation..')) }}</td></tr>
+					<tr><td><b>Confirm Password:</b></td><td>{{ Form::password('password_confirmation', null, array('class'=>'form-control','placeholder'=>'Password confirmation..')) }}</td></tr>
 					{{ Form::close() }}
 				</table>
 			</div>

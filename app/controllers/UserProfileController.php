@@ -45,7 +45,7 @@ class UserProfileController extends BaseController {
 		$user->lastname = Input::get('lastname');
 
 		if($user->save() ) {
-			return Redirect::to('profile/settings')->with('message', 'Your profile has been updated!');
+			return Redirect::to('profile/settings')->with('message', 'Your profile has been updated successfully!');
 		} else {
 			return Redirect::to('profile/settings')->with('message', 'Your profile has not been updated.');
 		}
@@ -59,6 +59,16 @@ class UserProfileController extends BaseController {
 
 	public function updatePass()
 	{
+		$id = Auth::user()->id;
+		$user = User::find($id);
+		$user->password = Hash::make(Input::get('password'));
+
+		if($user->save() ) {
+			return Redirect::to('profile/settings')->with('message', 'Your password has been updated successfully!');
+		} else {
+			return Redirect::to('profile/settings')->with('message', 'Your password has not been updated!');
+		}
+
 
 	}
 
@@ -69,9 +79,9 @@ class UserProfileController extends BaseController {
 		$user->description = Input::get('description');
 
 		if($user->save() ) {
-			return Redirect::to('profile/settings')->with('message', 'Your profile has been updated!');
+			return Redirect::to('profile/settings')->with('message', 'Your description has been updated successfully!');
 		} else {
-			return Redirect::to('profile/settings')->with('message', 'Your profile has not been updated.');
+			return Redirect::to('profile/settings')->with('message', 'Your description has not been updated.');
 		}
 	}
 
