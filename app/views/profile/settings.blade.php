@@ -14,6 +14,7 @@
 					<span class="glyphicon glyphicon-cog"></span> 
 					Edit
 				</button>
+				
 				<button id="saveMyName" type="button" data-target="edit-profile" class="btn btn-success btn-xs form-control-feedback pull-right saveMe">
 					<span class="glyphicon glyphicon-save"></span> 
 					Save
@@ -25,10 +26,10 @@
 					<tr><td><b>Lastname:</b></td><td>{{ Auth::user()->lastname }}</td></tr>
 				</table>
 				<table class="table-condensed" id="new">
-					{{ Form::open(array('url'=>'user/settings/editname','method'=>'PUT', 'id'=>'editName')) }}
-					<tr><td><b>Username:</b></td><td>{{ Form::text('username', null, array('class'=>'form-control')) }}</td></tr>
-					<tr><td><b>Firstname:</b></td><td>{{ Form::text('firstname', null, array('class'=>'form-control')) }}</td></tr>
-					<tr><td><b>Lastname:</b></td><td>{{ Form::text('lastname', null, array('class'=>'form-control')) }}</td></tr>
+					{{ Form::open(array('action'=>'UserProfileController@updateName', 'method'=>'PUT', 'id'=>'editName')) }}
+					<tr><td><b>Username:</b></td><td>{{ Form::text('username', Auth::user()->username , array('class'=>'form-control')) }}</td></tr>
+					<tr><td><b>Firstname:</b></td><td>{{ Form::text('firstname', Auth::user()->firstname, array('class'=>'form-control')) }}</td></tr>
+					<tr><td><b>Lastname:</b></td><td>{{ Form::text('lastname', Auth::user()->lastname, array('class'=>'form-control')) }}</td></tr>
 					{{ Form::close() }}
 				</table>
 			</div>

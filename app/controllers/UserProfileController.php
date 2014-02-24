@@ -31,6 +31,17 @@ class UserProfileController extends BaseController {
 
 	public function updateName()
 	{
+		$id = Auth::user()->id;
+		$user = User::find($id);
+		$user->username = Input::get('username');
+		$user->firstname = Input::get('firstname');
+		$user->lastname = Input::get('lastname');
+
+		if($user->save() ) {
+			return Redirect::to('profile/settings')->with('message', 'Your profile has been updated!');
+		} else {
+			return Redirect::to('profile/settings')->with('message', 'Your profile has not been updated');
+		}
 
 	}
 

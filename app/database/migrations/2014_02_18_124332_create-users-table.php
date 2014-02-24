@@ -23,6 +23,16 @@ class CreateUsersTable extends Migration {
 			$table->string('description', 400);
 			$table->timestamps();
 		});
+
+		User::create(
+			array(
+				'username'		=> 'henkie',
+				'firstname'		=> 'henk',
+				'lastname'		=> 'janwillem',
+				'email'			=> 'henk@henk.nl',
+				'password'		=> 'henkie',
+		));
+		$user->makeEmployee('super_admin');
 	}
 
 	/**
