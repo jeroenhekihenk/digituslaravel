@@ -8,6 +8,11 @@
 @section('content')
 <div class="row container" style="margin:0 auto;">
 	<div class="col-md-10 col-sm-10 col-xs-10 col-lg-10">
+				<ul>
+					@foreach($errors->all() as $error)
+	    				<li>{{ $error }}</li>
+	   				@endforeach
+				</ul>
 
 		<div class="panel panel-default">
 			<div class="panel-heading"><h3 style="margin:0;">User				<button id="editName" type="button" data-target="edit-profile" class="btn btn-primary btn-xs form-control-feedback pull-right">
@@ -80,6 +85,7 @@
 					Save
 				</button></h3> </div>
 			<div class="panel-body">
+				
 				<table class="table-condensed" id="oldPass">
 					{{ Form::open(array('action'=>'UserProfileController@updatePass', 'method'=>'PUT', 'id'=>'editPassword')) }}
 					<tr><td><b>Password:</b></td><td>{{ Form::password('password', null, array('class'=>'form-control','placeholder'=>'Password..')) }}</td></tr>

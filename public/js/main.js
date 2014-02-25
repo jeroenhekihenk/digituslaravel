@@ -26,7 +26,7 @@ $(document).ready(function(){
 		$('table#oldDesc, table#newDesc, button#saveMyDesc, button#cancelSaveMyDesc, button#editDesc').toggle();
 	});
 
-	$('button#editPassword, button#cancelSaveMyPassword').on('click', function(){
+	$('input[type="password"]').on('focus', function(){
 		$('button#saveMyPassword, button#cancelSaveMyPassword, button#editPassword').toggle();
 	});
 

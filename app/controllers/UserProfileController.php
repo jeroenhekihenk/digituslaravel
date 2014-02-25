@@ -59,14 +59,26 @@ class UserProfileController extends BaseController {
 
 	public function updatePass()
 	{
+		$input = Input::all();
 		$id = Auth::user()->id;
 		$user = User::find($id);
 		$user->password = Hash::make(Input::get('password'));
 
-		if($user->save() ) {
-			return Redirect::to('profile/settings')->with('message', 'Your password has been updated successfully!');
+		$rules = array(
+			'password'=>'required',
+			'password_confirmation'=>'required:password'
+		);
+
+		$validator = Validator::make($input, $rules);
+
+		if($validator->passes()) {
+			if(Input::get('password') === Input::get('password_confirmation')){
+				$user->save();
+				return Redirect::to('profile/settings')->with('message', 'Your passwords has been updated successfully!');
+			}
+			return Redirect::to('profile/settings')->with('message', 'Your password did not match')->withErrors($validator)->withInput();
 		} else {
-			return Redirect::to('profile/settings')->with('message', 'Your password has not been updated!');
+			return Redirect::to('profile/settings')->with('message', 'Your password has not been updated!')->withErrors($validator)->withInput();
 		}
 
 
@@ -102,6 +114,47 @@ class UserProfileController extends BaseController {
 		} else {
 		    return Redirect::to('profile/adminsettings')->with('message', 'The following errors occurred')->withErrors($validator)->withInput();
 		}
+	}
+
+	public function getUserProfile()
+	{
+		$user = Auth::user();
+		$this->layout->content = View::make('profile.userprofile');
+	}
+
+	public function postUpload()
+	{
+		$id = Auth::user()->id;
+		$input = Input::all();
+		$rules = array('photo'=>'required|mimes:jpg,gif,png|image|max:500');
+		$validator = Validator::make($input, $rules);
+
+		if($validator->fails()){
+			return Redirect::to('profile/settings')->withErrors($validator)->withInput();
+		}
+
+		$extension = Input::file('photo')->getClientOriginalExtension();
+		$directory = public_path('var/chroot/home/content/59/11581559/html/beta') . '/uploads/'.sha1($id);
+
+		$filename = sha1($id.time()).".{$extension}";
+		$upload_success = Input::file('photo')->move($directory,$filename);
+
+		Image::make(Input::file('photo')->getRealPath())->resize(300,200)->save('foo.jpg');
+
+		if($upload_success){
+			$photo = new Photos(array(
+				'location'=>URL::to('/uploads/'.sha1($id).'/'.$filename)
+			));
+
+			$photo->user_id = $id;
+			$photo->save();
+
+			return Redirect::to('profile/settings')->with('message', 'You have successfully uploaded your profile picture');
+		} else {
+			return Redirect::to('profile/settings')->with('message', 'Something went wrong.. Please try again.');
+		}
+
+		return Redirect::to('');
 	}
 
 }

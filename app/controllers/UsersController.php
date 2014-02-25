@@ -47,7 +47,7 @@ class UsersController extends BaseController {
 
 		if(!$user) {
 			$attempt = false;
-			return Redirect::to('login')->with('message', 'Your username/password combination was incorrect')->withInput();
+			return Redirect::to('login')->with('message', 'Your username/password combination was incorrect')->withErrors($validator)->withInput();
 		} else {
 			$attempt = Auth::attempt(array( 'email' => $user->email, 'password'=>$input['password']), $remember);
 			return Redirect::to('profile/dashboard')->with('message', 'You are now logged in!');

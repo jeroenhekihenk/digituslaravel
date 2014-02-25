@@ -14,6 +14,7 @@
 	<div id="overlay">
 		@yield('overlay')
 	</div>
+	@yield('notification')
 
 	<div class="navbar navbar-fixed-top navbar-default row">
 		<div class="navbar-inner">
@@ -34,6 +35,9 @@
 									{{ Auth::user()->username }} <span class="caret"></span>
 								</a>
 								<ul class="dropdown-menu">
+									<li>
+										{{ HTML::link("profile/".Auth::user()->username, 'My Profile') }}
+									</li>
 									<li>
 										{{ HTML::link("profile/dashboard", 'Dashboard')}}
 									</li>
@@ -73,7 +77,6 @@
 	<div id="content">
 		@yield('content')
 	</div>
-
 
 
 	{{ HTML::script('js/jquery-2.1.0.min.js') }}
